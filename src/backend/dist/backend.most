@@ -1,0 +1,100 @@
+// Version: 4.0.0
+type AccessControlState__836714403 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__222667396<Principal, UserRole__686137147>
+  };
+type Data__80296667<K, V> =
+  {var count : Nat__1040412405; kvs : [var ?(K, V)]};
+type DocumentId__758295848 = Nat;
+type DocumentId__869630293 = Nat;
+type DocumentVersion__151645430 =
+  {content : Text; savedAt : Int; title : Text};
+type DocumentVersion__241763798 =
+  {content : Text; savedAt : Int; title : Text};
+type Document__535405271 =
+  {
+    content : Text;
+    createdAt : Int;
+    id : DocumentId__758295848;
+    tagIds : [TagId__803624456];
+    title : Text;
+    updatedAt : Int
+  };
+type Document__636554508 =
+  {
+    content : Text;
+    createdAt : Int;
+    id : DocumentId__869630293;
+    tagIds : [TagId__44837743];
+    title : Text;
+    updatedAt : Int
+  };
+type Internal__41346355<K, V> =
+  {children : [var ?Node__1000929467<K, V>]; data : Data__80296667<K, V>};
+type Leaf__712614010<K, V> = {data : Data__80296667<K, V>};
+type Map__222667396<K, V> = Map__912772452<K, V>;
+type Map__709709801<K, V> =
+  {var root : Node__1000929467<K, V>; var size : Nat__1040412405};
+type Map__912772452<K, V> = Map__709709801<K, V>;
+type Nat__1040412405 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__1000929467<K, V> =
+  {#internal : Internal__41346355<K, V>; #leaf : Leaf__712614010<K, V>};
+type TagId__44837743 = Nat;
+type TagId__803624456 = Nat;
+type Tag__292180397 = {color : Text; id : TagId__803624456; name : Text};
+type Tag__973970575 = {color : Text; id : TagId__44837743; name : Text};
+type UserProfile__248713505 = {name : Text};
+type UserProfile__491224006 = {name : Text};
+type UserRole__686137147 = {#admin; #guest; #user};
+{
+  "20250101_000000_Init" :
+    {} ->
+      {
+        accessControlState : AccessControlState__836714403;
+        var nextDocId : Nat;
+        var nextTagId : Nat;
+        userDocuments :
+          Map__222667396<Principal, Map__222667396<Nat, Document__535405271>>;
+        userProfiles : Map__222667396<Principal, UserProfile__248713505>;
+        userTags :
+          Map__222667396<Principal, Map__222667396<Nat, Tag__292180397>>;
+        userVersions :
+          Map__222667396<Principal,
+                          Map__222667396<Nat, [DocumentVersion__151645430]>>
+      }
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__222667396<Principal, UserRole__686137147>
+    };
+  stable var nextDocId : Nat;
+  stable var nextTagId : Nat;
+  stable userDocuments :
+    {
+      var root :
+        Node__1000929467<Principal, Map__222667396<Nat, Document__636554508>>;
+      var size : Nat__1040412405
+    };
+  stable userProfiles :
+    {
+      var root : Node__1000929467<Principal, UserProfile__491224006>;
+      var size : Nat__1040412405
+    };
+  stable userTags :
+    {
+      var root :
+        Node__1000929467<Principal, Map__222667396<Nat, Tag__973970575>>;
+      var size : Nat__1040412405
+    };
+  stable userVersions :
+    {
+      var root :
+        Node__1000929467<Principal,
+                          Map__222667396<Nat, [DocumentVersion__241763798]>>;
+      var size : Nat__1040412405
+    }
+};
